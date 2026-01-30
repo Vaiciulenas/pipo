@@ -70,7 +70,7 @@ body {
   height: 12px;
   background: var(--cyan);
   box-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
-  animation: blink 1.6s infinite steps(1);
+  animation: blink 1.6s infinite;
 }
 
 .home__pixel--alt {

@@ -11,6 +11,10 @@ const pressStart = Press_Start_2P({
 export const metadata: Metadata = {
   title: "PIPO",
   description: "Pixel-perfect 3D printing from idea to reality.",
+  icons: {
+    icon: "/assets/circle-pipo.png",
+    apple: "/assets/circle-pipo.png",
+  }
 };
 
 export default function RootLayout({
