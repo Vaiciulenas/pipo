@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
 
 const pressStart = Press_Start_2P({
   weight: "400",
@@ -15,19 +14,17 @@ export const metadata: Metadata = {
   icons: {
     icon: "/assets/circle-pipo.png",
     apple: "/assets/circle-pipo.png",
-  },
+  }
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className={pressStart.variable}>
-        <Providers>{children}</Providers>
-      </body>
+      <body className={pressStart.variable}>{children}</body>
     </html>
   );
 }
