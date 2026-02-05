@@ -13,10 +13,10 @@ const pressStart = Press_Start_2P({
 
 export const metadata: Metadata = {
   title: "PIPO",
-  description: "Pixel-perfect 3D printing from idea to reality.",
+  description: "PIPO 3D printing - computer accessories, car accessories and home decorations made with precision and attention to detail.",
   icons: {
-    icon: "/assets/circle-pipo.png",
-    apple: "/assets/circle-pipo.png",
+    icon: "/pipo.png",
+    apple: "/pipo.png",
   },
 };
 
