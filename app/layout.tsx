@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: "PIPO",
   description: "PIPO 3D printing - computer accessories, car accessories and home decorations made with precision and attention to detail.",
   icons: {
-    icon: "/pipo.png",
-    apple: "/pipo.png",
+    icon: "/assets/pipo.png",
+    apple: "/assets/pipo.png",
   },
 };
 
