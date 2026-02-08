@@ -62,6 +62,7 @@ export default function Examples() {
                   src={item.image}
                   alt={item.imageAlt ?? item.title}
                   fill
+                  quality={100}
                   sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
                   style={{ objectFit: "cover" }}
                 />

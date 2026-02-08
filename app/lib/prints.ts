@@ -3,7 +3,8 @@ export type PrintItem = {
   title: string;
   tags: string[];
   description: string;
-  image?: string; // optional for later
+  images?: string[]; // optional for later
+  image?: string; // optional for later (single image)
   imageAlt?: string; // optional for later
 };
 
@@ -13,6 +14,10 @@ export const PRINTS: PrintItem[] = [
     title: "License Plate Holder",
     tags: ["prototype", "car", "abs"],
     description: "Snap-fit license plate holder.",
+    images: [
+      "/prints/license-plate-holder.jpg",
+      "/prints/example.jpg"
+    ],
     image: "/prints/license-plate-holder.jpg",
     imageAlt: "3D printed license plate holder mounted on a car.",
   },
