@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PIPO
 
-## Getting Started
+Website for **PIPO**, my small 3D printing project: computer accessories, car accessories and home decorations. It shows a catalogue of printed parts with search, photo galleries and a contact page, in a retro pixel-art style.
 
-First, run the development server:
+The site is self-hosted on my own home server.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **Print catalogue:** each print has its own page with a title, tags, a description and photos.
+- **Instant search:** suggestions appear while you type in the navbar, and results are ranked by relevance. Title matches rank above tag matches, which rank above description matches, and matches at the start of a word score higher.
+- **Keyboard-friendly search:** use the arrow keys to move through suggestions, Enter to open one and Esc to close the list. On mobile, search opens in its own dialog.
+- **Photo lightbox:** an image gallery (full-screen on phones) with thumbnails, next/previous buttons, arrow-key navigation and swipe support on touch screens.
+- **Responsive retro design:** a pixel font (Press Start 2P) with Material UI components, adapted for mobile and desktop.
+
+## Tech stack
+
+| Area | Tools |
+| --- | --- |
+| Framework | Next.js 16 (App Router), React 19 |
+| Language | TypeScript |
+| UI | Material UI 7, Tailwind CSS 4 |
+| Hosting | Ubuntu Server, Docker, Cloudflare Tunnel |
+| Monitoring | Uptime Kuma |
+
+## Project structure
+
+```
+app/
+├── components/        Navbar and homepage sections (Hero, Examples, ...)
+├── lib/
+│   ├── prints.ts      Catalogue data and the PrintItem type
+│   └── search.ts      Search and ranking logic
+├── prints/[id]/       Print detail page with the photo lightbox
+├── search/            Search results page
+├── contact/           Contact page
+└── layout.tsx         Root layout, fonts and metadata
+public/prints/         Product photos
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Requires Node.js 20 or newer.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Then open http://localhost:3000.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site runs on a home server (an ASUS Chromebox running Ubuntu Server):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. The app is built into a **Docker** image and runs as a container on port 3000, set to restart automatically.
+2. A **Cloudflare Tunnel** (`cloudflared`, also in Docker) makes the site reachable from the internet over HTTPS, without opening any ports on the home router.
+3. **Uptime Kuma** monitors the site and reports if it goes down.
 
-## Deploy on Vercel
+To deploy an update, the server pulls the latest code from this repository, rebuilds the image and replaces the running container.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Roadmap
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Connect the contact form to an email service
+- Add more prints and photos to the catalogue

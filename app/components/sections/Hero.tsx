@@ -31,7 +31,6 @@ export default function Hero() {
         with clean geometry, tight tolerances, and a focus on detail.
       </Typography>
 
-      {/* Replace this with your photo later */}
       <Paper
         variant="outlined"
         sx={{

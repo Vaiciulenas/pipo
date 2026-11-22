@@ -41,7 +41,6 @@ export default function Examples() {
               borderColor: "rgba(255,255,255,0.10)",
               display: "block",
 
-              // subtle hover lift (minimal)
               transition: "transform 160ms ease, border-color 160ms ease",
               "&:hover": {
                 transform: "translateY(-2px)",
@@ -68,7 +67,6 @@ export default function Examples() {
                 />
               ) : null}
 
-              {/* Hover caption overlay */}
               <Box
                 sx={{
                   position: "absolute",
@@ -81,7 +79,6 @@ export default function Examples() {
                   opacity: 0,
                   transition: "opacity 160ms ease",
 
-                  // show on hover/focus (keyboard-friendly)
                   ".MuiPaper-root:hover &": { opacity: 1 },
                   ".MuiPaper-root:focus-visible &": { opacity: 1 },
                 }}
@@ -98,7 +95,6 @@ export default function Examples() {
               </Box>
             </Box>
 
-            {/* Base caption (always visible, minimal) */}
             <Box sx={{ p: 2.5 }}>
               <Typography sx={{ fontSize: 11, opacity: 0.85 }}>
                 {item.title}

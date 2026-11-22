@@ -77,7 +77,6 @@ export default function PrintDetailPage() {
   const id = params?.id;
   const item = React.useMemo(() => PRINTS.find((p) => p.id === id), [id]);
 
-  // If params isn't ready yet (rare, but safe)
   if (!id) {
     return (
       <Box component="main" sx={{ py: { xs: 8, md: 10 } }}>
@@ -88,7 +87,6 @@ export default function PrintDetailPage() {
     );
   }
 
-  // If no such print exists -> show a simple "not found" UI
   if (!item) {
     return (
       <Box component="main" sx={{ py: { xs: 8, md: 10 } }}>
@@ -112,7 +110,6 @@ export default function PrintDetailPage() {
     );
   }
 
-  // Build images array (supports items with images[] OR single image)
   const images: string[] =
     item.images?.length ? item.images : item.image ? [item.image] : [];
 
@@ -122,7 +119,7 @@ export default function PrintDetailPage() {
   const [active, setActive] = React.useState(0);
   const [open, setOpen] = React.useState(false);
 
-  // keep active index valid if images array changes
+  // Reset the active image if it no longer exists
   React.useEffect(() => {
     if (active > images.length - 1) setActive(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -205,7 +202,6 @@ export default function PrintDetailPage() {
             mb: 4,
           }}
         >
-          {/* Main image */}
           <Box sx={{ position: "relative", width: "100%", aspectRatio: "16 / 10" }}>
             {images.length ? (
               <Box
@@ -243,7 +239,6 @@ export default function PrintDetailPage() {
             )}
           </Box>
 
-          {/* Thumbnails row (page) */}
           {images.length > 1 && (
             <Box
               sx={{
@@ -290,7 +285,6 @@ export default function PrintDetailPage() {
           ))}
         </Box>
 
-        {/* Dialog Lightbox with pinned thumbnails */}
         <Dialog
           open={open}
           onClose={closeLightbox}
@@ -308,12 +302,11 @@ export default function PrintDetailPage() {
             sx={{
               position: "relative",
               width: fullScreen ? "100vw" : "min(92vw, 1100px)",
-              height: fullScreen ? "100vh" : "min(80vh, 780px)", // <-- ensures big image area has height
+              height: fullScreen ? "100vh" : "min(80vh, 780px)",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            {/* Close */}
             <IconButton
               onClick={closeLightbox}
               aria-label="Close"
@@ -328,7 +321,6 @@ export default function PrintDetailPage() {
               <CloseIcon />
             </IconButton>
 
-            {/* Prev/Next (only if many) */}
             {hasMany && (
               <>
                 <IconButton
@@ -367,7 +359,6 @@ export default function PrintDetailPage() {
               </>
             )}
 
-            {/* Big image area */}
             <Box
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
@@ -391,7 +382,6 @@ export default function PrintDetailPage() {
               ) : null}
             </Box>
 
-            {/* Thumbnails pinned at bottom */}
             {images.length > 1 && (
               <Box
                 sx={{

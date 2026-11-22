@@ -3,9 +3,9 @@ export type PrintItem = {
   title: string;
   tags: string[];
   description: string;
-  images?: string[]; // optional for later
-  image?: string; // optional for later (single image)
-  imageAlt?: string; // optional for later
+  images?: string[];
+  image?: string;
+  imageAlt?: string;
 };
 
 export const PRINTS: PrintItem[] = [

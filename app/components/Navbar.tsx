@@ -116,7 +116,6 @@ export default function Navbar() {
     return searchPrints(PRINTS, q).slice(0, 6);
   }, [query]);
 
-  // Enter/submit -> goes to search results page
   function goToSearch(value: string) {
     const q = value.trim();
     if (!q) return;
@@ -126,13 +125,12 @@ export default function Navbar() {
     router.push(`/search?q=${encodeURIComponent(q)}`);
   }
 
-  // Clicking a suggestion -> goes directly to print detail page
   function goToPrint(id: string) {
     if (!id) return;
     setOpen(false);
     setMobileOpen(false);
     setHighlighted(-1);
-    setQuery(""); // optional: clear input after navigation
+    setQuery("");
     router.push(`/prints/${id}`);
   }
 
@@ -141,7 +139,6 @@ export default function Navbar() {
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
-    // Open suggestions when typing (desktop)
     if (!open && suggestions.length > 0 && e.key.length === 1) setOpen(true);
 
     if (e.key === "Escape") {
@@ -164,7 +161,7 @@ export default function Navbar() {
       return;
     }
 
-    // Enter on a highlighted suggestion -> go to /prints/[id]
+    // Enter on a highlighted suggestion opens that print directly
     if (e.key === "Enter" && highlighted >= 0) {
       e.preventDefault();
       goToPrint(suggestions[highlighted].id);
@@ -194,7 +191,6 @@ export default function Navbar() {
               gap: 2,
             }}
           >
-            {/* Left */}
             <Box sx={{ justifySelf: "start" }}>
               <Typography
                 component={Link}
@@ -211,7 +207,6 @@ export default function Navbar() {
               </Typography>
             </Box>
 
-            {/* Center (desktop search) */}
             <Box
               ref={anchorRef}
               sx={{ display: { xs: "none", sm: "block" }, justifySelf: "center" }}
@@ -262,7 +257,7 @@ export default function Navbar() {
                               selected={i === highlighted}
                               onMouseEnter={() => setHighlighted(i)}
                               onMouseDown={(e) => e.preventDefault()}
-                              onClick={() => goToPrint(s.id)} // ✅ go to /prints/[id]
+                              onClick={() => goToPrint(s.id)}
                               sx={{
                                 px: 2,
                                 py: 1.25,
@@ -302,7 +297,6 @@ export default function Navbar() {
               </ClickAwayListener>
             </Box>
 
-            {/* Right */}
             <Box
               sx={{
                 justifySelf: "end",
@@ -313,7 +307,6 @@ export default function Navbar() {
                 gap: 1,
               }}
             >
-              {/* Mobile search icon (right aligned) */}
               {isMobile && (
                 <IconButton
                   aria-label="open search"
@@ -356,7 +349,6 @@ export default function Navbar() {
         </AppBar>
       </HideOnScroll>
 
-      {/* Mobile search dialog */}
       <Dialog
         fullWidth
         open={mobileOpen}
@@ -377,13 +369,12 @@ export default function Navbar() {
               setOpen(Boolean(v.trim()));
               setHighlighted(-1);
             }}
-            onSubmit={() => goToSearch(query)} // Enter -> /search?q=...
+            onSubmit={() => goToSearch(query)}
             onKeyDown={(e) => {
               if (e.key === "Escape") setMobileOpen(false);
             }}
           />
 
-          {/* Mobile suggestions (also opaque) */}
           {query.trim() && suggestions.length > 0 ? (
             <Paper
               variant="outlined"
