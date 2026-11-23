@@ -14,24 +14,9 @@ export const PRINTS: PrintItem[] = [
     title: "License Plate Holder",
     tags: ["prototype", "car", "abs"],
     description: "Snap-fit license plate holder.",
-    images: [
-      "/prints/license-plate-holder.jpg",
-      "/prints/example.jpg"
-    ],
+    images: ["/prints/license-plate-holder.jpg"],
     image: "/prints/license-plate-holder.jpg",
-    imageAlt: "3D printed license plate holder mounted on a car.",
-  },
-  {
-    id: "Example",
-    title: "Example",
-    tags: ["Example", "Example", "Example"],
-    description: "Example Description",
-  },
-  {
-    id: "Example",
-    title: "Example",
-    tags: ["Example", "Example", "Example"],
-    description: "Example Description",
+    imageAlt: "Two black 3D printed license plate holder brackets with the PIPO logo.",
   },
 ];
 

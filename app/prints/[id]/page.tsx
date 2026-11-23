@@ -19,7 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import { PRINTS } from "@/app/lib/prints";
+import { PRINTS, type PrintItem } from "@/app/lib/prints";
 
 function Thumb({
   src,
@@ -110,6 +110,11 @@ export default function PrintDetailPage() {
     );
   }
 
+  return <PrintDetail item={item} />;
+}
+
+// Separate component so its hooks never run after an early return
+function PrintDetail({ item }: { item: PrintItem }) {
   const images: string[] =
     item.images?.length ? item.images : item.image ? [item.image] : [];
 
@@ -119,7 +124,6 @@ export default function PrintDetailPage() {
   const [active, setActive] = React.useState(0);
   const [open, setOpen] = React.useState(false);
 
-  // Reset the active image if it no longer exists
   React.useEffect(() => {
     if (active > images.length - 1) setActive(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -141,7 +145,6 @@ export default function PrintDetailPage() {
     setActive((i) => (i + 1) % images.length);
   }, [hasMany, images.length]);
 
-  // Keyboard support in dialog
   React.useEffect(() => {
     if (!open) return;
 
@@ -156,7 +159,6 @@ export default function PrintDetailPage() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, hasMany, prev, next]);
 
-  // Swipe support (dialog)
   const touchStartX = React.useRef<number | null>(null);
   const onTouchStart = (e: React.TouchEvent) => {
     if (!hasMany) return;
@@ -170,7 +172,8 @@ export default function PrintDetailPage() {
     touchStartX.current = null;
 
     if (Math.abs(dx) < 40) return;
-    dx > 0 ? prev() : next();
+    if (dx > 0) prev();
+    else next();
   };
 
   const theme = useTheme();

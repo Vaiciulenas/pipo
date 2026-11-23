@@ -2,7 +2,6 @@ import type { PrintItem } from "./prints";
 
 const norm = (s: string) => s.toLowerCase().trim();
 
-// Lowercased words from the title, tags and description
 function tokenize(item: PrintItem): string[] {
   const combined = `${item.title} ${item.tags.join(" ")} ${item.description}`;
   return norm(combined)
@@ -24,7 +23,6 @@ export function searchPrints(items: PrintItem[], query: string): PrintItem[] {
     .map((item) => {
       const tokens = tokenize(item);
 
-      // Every query word must match something, otherwise skip the item
       const matchesAll = words.every((w) => tokens.some((t) => tokenMatches(t, w)));
       if (!matchesAll) return { item, score: 0 };
 

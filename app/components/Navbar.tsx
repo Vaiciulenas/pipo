@@ -106,7 +106,7 @@ export default function Navbar() {
   const [highlighted, setHighlighted] = React.useState(-1);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const anchorRef = React.useRef<HTMLDivElement | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
 
   const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 0 });
 
@@ -161,7 +161,6 @@ export default function Navbar() {
       return;
     }
 
-    // Enter on a highlighted suggestion opens that print directly
     if (e.key === "Enter" && highlighted >= 0) {
       e.preventDefault();
       goToPrint(suggestions[highlighted].id);
@@ -208,7 +207,7 @@ export default function Navbar() {
             </Box>
 
             <Box
-              ref={anchorRef}
+              ref={setAnchorEl}
               sx={{ display: { xs: "none", sm: "block" }, justifySelf: "center" }}
             >
               <ClickAwayListener
@@ -234,7 +233,7 @@ export default function Navbar() {
 
                   <Popper
                     open={open && suggestions.length > 0}
-                    anchorEl={anchorRef.current}
+                    anchorEl={anchorEl}
                     placement="bottom"
                     modifiers={[{ name: "offset", options: { offset: [0, 10] } }]}
                     style={{ zIndex: 1300 }}
@@ -324,7 +323,7 @@ export default function Navbar() {
                 component={Link}
                 href="/"
                 color="inherit"
-                sx={{ fontSize: 12, opacity: pathname === "/" ? 1 : 0.65 }}
+                sx={{ fontSize: { xs: 9, sm: 12 }, minWidth: 0, px: { xs: 0.75, sm: 1 }, opacity: pathname === "/" ? 1 : 0.65 }}
               >
                 Home
               </Button>
@@ -332,7 +331,7 @@ export default function Navbar() {
                 component={Link}
                 href="/services"
                 color="inherit"
-                sx={{ fontSize: 12, opacity: pathname === "/services" ? 1 : 0.65 }}
+                sx={{ fontSize: { xs: 9, sm: 12 }, minWidth: 0, px: { xs: 0.75, sm: 1 }, opacity: pathname === "/services" ? 1 : 0.65 }}
               >
                 Services
               </Button>
@@ -340,7 +339,7 @@ export default function Navbar() {
                 component={Link}
                 href="/contact"
                 color="inherit"
-                sx={{ fontSize: 12, opacity: pathname === "/contact" ? 1 : 0.65 }}
+                sx={{ fontSize: { xs: 9, sm: 12 }, minWidth: 0, px: { xs: 0.75, sm: 1 }, opacity: pathname === "/contact" ? 1 : 0.65 }}
               >
                 Contact
               </Button>

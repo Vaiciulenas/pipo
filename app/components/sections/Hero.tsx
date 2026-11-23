@@ -1,10 +1,34 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
+import Image from "next/image";
+
+import PixelButton from "../PixelButton";
 
 export default function Hero() {
   return (
     <Box sx={{ textAlign: "center" }}>
+      <Box
+        sx={{
+          position: "relative",
+          width: { xs: 160, md: 220 },
+          aspectRatio: "1 / 1",
+          mx: "auto",
+          mb: 4,
+          border: "4px solid #000",
+          boxShadow: "8px 8px 0 #000",
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          src="/assets/pipo.png"
+          alt="Pixel-art 3D printer printing a cube"
+          fill
+          priority
+          sizes="220px"
+          style={{ objectFit: "cover", imageRendering: "pixelated" }}
+        />
+      </Box>
+
       <Typography
         variant="h1"
         sx={{
@@ -24,39 +48,19 @@ export default function Hero() {
           fontSize: 12,
           lineHeight: 1.9,
           opacity: 0.8,
-          mb: 6,
+          mb: 5,
         }}
       >
         From idea to reality. We create functional prototypes and small-batch parts
         with clean geometry, tight tolerances, and a focus on detail.
       </Typography>
 
-      <Paper
-        variant="outlined"
-        sx={{
-          mx: "auto",
-          width: "100%",
-          maxWidth: 820,
-          aspectRatio: "16/9",
-          borderRadius: 3,
-          overflow: "hidden",
-          background: "rgba(0,0,0,0.18)",
-          borderColor: "rgba(255,255,255,0.10)",
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            display: "grid",
-            placeItems: "center",
-            opacity: 0.7,
-            fontSize: 12,
-          }}
-        >
-          PLACEHOLDER IMAGE 
-        </Box>
-      </Paper>
+      <Box sx={{ display: "flex", gap: 3, justifyContent: "center", flexWrap: "wrap" }}>
+        <PixelButton href="/#prints">Browse prints</PixelButton>
+        <PixelButton href="/contact" variant="outlined">
+          Get a quote
+        </PixelButton>
+      </Box>
     </Box>
   );
 }

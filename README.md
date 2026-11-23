@@ -48,6 +48,14 @@ npm run dev
 
 Then open http://localhost:3000.
 
+### Contact form
+
+Messages from the contact form are forwarded as JSON (`name`, `email`, `subject`, `message`, `sentAt`) to a webhook, for example an n8n workflow that emails them. Set the URL in `.env.local` (or in the Docker container's environment):
+
+```bash
+CONTACT_WEBHOOK_URL=https://your-n8n-host/webhook/contact
+```
+
 ## Deployment
 
 The site runs on a home server (an ASUS Chromebox running Ubuntu Server):
@@ -60,5 +68,4 @@ To deploy an update, the server pulls the latest code from this repository, rebu
 
 ## Roadmap
 
-- Connect the contact form to an email service
 - Add more prints and photos to the catalogue

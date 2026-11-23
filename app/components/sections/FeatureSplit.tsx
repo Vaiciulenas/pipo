@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import Image from "next/image";
 
 export default function FeatureSplit() {
   return (
@@ -36,16 +37,14 @@ export default function FeatureSplit() {
           borderColor: "rgba(255,255,255,0.10)",
         }}
       >
-        <Box
-          sx={{
-            aspectRatio: "16/10",
-            display: "grid",
-            placeItems: "center",
-            opacity: 0.7,
-            fontSize: 12,
-          }}
-        >
-          PLACEHOLDER PHOTO
+        <Box sx={{ position: "relative", aspectRatio: "16/10" }}>
+          <Image
+            src="/prints/license-plate-holder.jpg"
+            alt="Two black 3D printed license plate holder brackets with the PIPO logo"
+            fill
+            sizes="(max-width: 900px) 100vw, 600px"
+            style={{ objectFit: "cover" }}
+          />
         </Box>
       </Paper>
     </Box>

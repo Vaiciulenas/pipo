@@ -10,7 +10,7 @@ import { PRINTS } from "@/app/lib/prints";
 
 export default function Examples() {
   return (
-    <Box>
+    <Box id="prints" sx={{ scrollMarginTop: 96 }}>
       <Typography variant="h2" sx={{ fontSize: 16, letterSpacing: 1.5, mb: 4 }}>
         Example prints
       </Typography>
@@ -102,6 +102,39 @@ export default function Examples() {
             </Box>
           </Paper>
         ))}
+
+        <Paper
+          variant="outlined"
+          component={Link}
+          href="/contact"
+          sx={{
+            borderRadius: 3,
+            textDecoration: "none",
+            color: "inherit",
+            backgroundColor: "rgba(0,0,0,0.16)",
+            borderColor: "rgba(255,255,255,0.10)",
+            borderStyle: "dashed",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            gap: 2,
+            p: 4,
+            minHeight: 240,
+            transition: "transform 160ms ease, border-color 160ms ease",
+            "&:hover": {
+              transform: "translateY(-2px)",
+              borderColor: "rgba(255,255,255,0.3)",
+            },
+          }}
+        >
+          <Typography sx={{ fontSize: 28, color: "primary.main" }}>+</Typography>
+          <Typography sx={{ fontSize: 12 }}>Your idea here</Typography>
+          <Typography sx={{ fontSize: 10, lineHeight: 1.8, opacity: 0.7 }}>
+            Need a custom part? Send a sketch, a photo or measurements.
+          </Typography>
+        </Paper>
       </Box>
     </Box>
   );

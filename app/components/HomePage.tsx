@@ -5,11 +5,10 @@ import Hero from "./sections/Hero";
 import WhatWeDo from "./sections/WhatWeDo";
 import Examples from "./sections/Examples";
 import FeatureSplit from "./sections/FeatureSplit";
-import SiteFooter from "./sections/SiteFooter";
 
 export default function HomePage() {
   return (
-    <Box component="main" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box component="main" sx={{ pt: { xs: 8, md: 12 }, pb: { xs: 10, md: 14 } }}>
       <Container maxWidth="md">
         <Hero />
       </Container>
@@ -30,12 +29,6 @@ export default function HomePage() {
 
       <Container maxWidth="lg">
         <FeatureSplit />
-      </Container>
-
-      <Box sx={{ height: { xs: 72, md: 120 } }} />
-
-      <Container maxWidth="md">
-        <SiteFooter />
       </Container>
     </Box>
   );

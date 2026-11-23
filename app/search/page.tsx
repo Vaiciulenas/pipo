@@ -1,19 +1,20 @@
-"use client";
-
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import Link from "next/link";
 
 import { PRINTS } from "../lib/prints";
 import { searchPrints } from "../lib/search";
 
-export default function SearchPage({
+export const metadata = { title: "Search | PIPO 3D printing" };
+
+export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
-  const q = (searchParams.q ?? "").trim();
+  const q = ((await searchParams).q ?? "").trim();
   const results = searchPrints(PRINTS, q);
 
   return (
@@ -45,42 +46,50 @@ export default function SearchPage({
           }}
         >
           {results.map((item) => (
-            <Paper
+            <Link
               key={item.id}
-              variant="outlined"
-              sx={{
-                p: 3,
-                borderRadius: 3,
-                background: "rgba(0,0,0,0.16)",
-                borderColor: "rgba(255,255,255,0.10)",
-              }}
+              href={`/prints/${item.id}`}
+              style={{ color: "inherit", textDecoration: "none" }}
             >
-              <Typography sx={{ fontSize: 12, mb: 1.5 }}>
-                {item.title}
-              </Typography>
+              <Paper
+                variant="outlined"
+                sx={{
+                  p: 3,
+                  height: "100%",
+                  borderRadius: 3,
+                  background: "rgba(0,0,0,0.16)",
+                  borderColor: "rgba(255,255,255,0.10)",
+                  transition: "border-color 160ms ease",
+                  "&:hover": { borderColor: "rgba(255,255,255,0.25)" },
+                }}
+              >
+                <Typography sx={{ fontSize: 12, mb: 1.5 }}>
+                  {item.title}
+                </Typography>
 
-              <Typography sx={{ fontSize: 11, lineHeight: 1.8, opacity: 0.75 }}>
-                {item.description}
-              </Typography>
+                <Typography sx={{ fontSize: 11, lineHeight: 1.8, opacity: 0.75 }}>
+                  {item.description}
+                </Typography>
 
-              <Box sx={{ mt: 2, display: "flex", gap: 1, flexWrap: "wrap" }}>
-                {item.tags.map((t) => (
-                  <Box
-                    key={t}
-                    sx={{
-                      fontSize: 10,
-                      opacity: 0.7,
-                      border: "1px solid rgba(255,255,255,0.10)",
-                      borderRadius: 999,
-                      px: 1,
-                      py: 0.5,
-                    }}
-                  >
-                    {t}
-                  </Box>
-                ))}
-              </Box>
-            </Paper>
+                <Box sx={{ mt: 2, display: "flex", gap: 1, flexWrap: "wrap" }}>
+                  {item.tags.map((t) => (
+                    <Box
+                      key={t}
+                      sx={{
+                        fontSize: 10,
+                        opacity: 0.7,
+                        border: "1px solid rgba(255,255,255,0.10)",
+                        borderRadius: 999,
+                        px: 1,
+                        py: 0.5,
+                      }}
+                    >
+                      {t}
+                    </Box>
+                  ))}
+                </Box>
+              </Paper>
+            </Link>
           ))}
         </Box>
       </Container>
